@@ -23,3 +23,9 @@ def get_nhours_ago_time_YYYYmmddTHHMMSZ(hours_ago=1) -> str:
     formatted_hours_ago = hours_ago.strftime("%Y-%m-%dT%H:%M:%S%z").replace("+0800", "+08:00")
     return formatted_hours_ago
 
+# 时间戳(支持秒级和毫秒级时间戳)转小时分钟(格式: 14:57)
+def timestamp_2_HHMM(timestamp: int) -> str:
+    if len(str(timestamp)) > 10:
+        timestamp /= 1000.0
+    return datetime.fromtimestamp(timestamp).strftime("%H:%M")
+
