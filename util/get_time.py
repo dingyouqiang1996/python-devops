@@ -15,7 +15,7 @@ def get_ndays_ago_time_YYYYmmddTHHMMSZ(days_ago=1) -> str:
     formatted_days_ago = days_ago.strftime("%Y-%m-%dT%H:%M:%S%z").replace("+0800", "+08:00")
     return formatted_days_ago
 
-# 获取n小时前的时间()
+# 获取n小时前的时间(格式：2024-01-05T10:18:39+08:00)
 def get_nhours_ago_time_YYYYmmddTHHMMSZ(hours_ago=1) -> str:
     desired_timezone = pytz.timezone('Asia/Shanghai')
     current_time = datetime.now(pytz.utc).astimezone(desired_timezone)
@@ -23,5 +23,9 @@ def get_nhours_ago_time_YYYYmmddTHHMMSZ(hours_ago=1) -> str:
     formatted_hours_ago = hours_ago.strftime("%Y-%m-%dT%H:%M:%S%z").replace("+0800", "+08:00")
     return formatted_hours_ago
 
-print(get_ndays_ago_time_YYYYmmddTHHMMSZ(2))
-print(type(get_nhours_ago_time_YYYYmmddTHHMMSZ()))
+# 时间戳(支持秒级和毫秒级时间戳)转小时分钟(格式: 14:57)
+def timestamp_2_HHMM(timestamp: int) -> str:
+    if len(str(timestamp)) > 10:
+        timestamp /= 1000.0
+    return datetime.fromtimestamp(timestamp).strftime("%H:%M")
+
